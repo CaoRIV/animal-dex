@@ -1,0 +1,902 @@
+{
+  "antelope": {
+    "class_name": "antelope",
+    "display_name": "Antelope",
+    "description": "A fast hoofed mammal known for agility, alert behavior, and slender horns in many species.",
+    "habitat": "Grasslands, savannas, shrublands, and open woodlands.",
+    "diet": "Herbivore: grasses, leaves, shoots, and herbs.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Many antelopes rely on speed and sharp senses to avoid predators."
+  },
+  "badger": {
+    "class_name": "badger",
+    "display_name": "Badger",
+    "description": "A sturdy burrowing mammal with strong claws and a reputation for being defensive when threatened.",
+    "habitat": "Woodlands, grasslands, farmland edges, and underground burrows.",
+    "diet": "Omnivore: insects, worms, small animals, roots, fruit, and eggs.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Badgers can dig complex tunnel systems called setts."
+  },
+  "bat": {
+    "class_name": "bat",
+    "display_name": "Bat",
+    "description": "The only mammal capable of true sustained flight, with many species using echolocation.",
+    "habitat": "Caves, forests, buildings, and tree hollows.",
+    "diet": "Mostly insects, fruit, nectar, or small animals depending on species.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Some bats can locate tiny insects in complete darkness using sound."
+  },
+  "bear": {
+    "class_name": "bear",
+    "display_name": "Bear",
+    "description": "A powerful large mammal with strong limbs, keen smell, and varied behavior across species.",
+    "habitat": "Forests, mountains, tundra, and coastal regions.",
+    "diet": "Omnivore: berries, roots, fish, insects, carrion, and mammals.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "A bear's sense of smell is among the strongest in the animal kingdom."
+  },
+  "bee": {
+    "class_name": "bee",
+    "display_name": "Bee",
+    "description": "A pollinating insect that helps plants reproduce and often lives in highly organized colonies.",
+    "habitat": "Gardens, forests, fields, orchards, and hives.",
+    "diet": "Nectar and pollen.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Bees communicate food locations through movement patterns known as dances."
+  },
+  "beetle": {
+    "class_name": "beetle",
+    "display_name": "Beetle",
+    "description": "A diverse insect with hardened forewings that protect the flying wings underneath.",
+    "habitat": "Forests, grasslands, soil, freshwater edges, and gardens.",
+    "diet": "Plants, fungi, wood, carrion, dung, or smaller insects depending on species.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Beetles make up one of the largest groups of animals on Earth."
+  },
+  "bison": {
+    "class_name": "bison",
+    "display_name": "Bison",
+    "description": "A large grazing mammal with a heavy shoulder hump, thick coat, and strong herd behavior.",
+    "habitat": "Prairies, grasslands, and open plains.",
+    "diet": "Herbivore: grasses, sedges, and other low plants.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Bison can run surprisingly fast despite their massive size."
+  },
+  "boar": {
+    "class_name": "boar",
+    "display_name": "Boar",
+    "description": "A wild pig with tusks, a strong snout, and adaptable feeding habits.",
+    "habitat": "Forests, wetlands, grasslands, and farmland edges.",
+    "diet": "Omnivore: roots, fruit, insects, eggs, small animals, and crops.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Boars use their snouts to root through soil for food."
+  },
+  "butterfly": {
+    "class_name": "butterfly",
+    "display_name": "Butterfly",
+    "description": "A colorful flying insect known for delicate wings and a complete life cycle from caterpillar to adult.",
+    "habitat": "Gardens, meadows, forests, wetlands, and open fields.",
+    "diet": "Nectar as adults; leaves as caterpillars.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Butterflies taste with sensors on their feet."
+  },
+  "cat": {
+    "class_name": "cat",
+    "display_name": "Cat",
+    "description": "A small carnivorous mammal known for stealth, balance, and close association with humans.",
+    "habitat": "Homes, cities, farms, and many outdoor environments.",
+    "diet": "Carnivore: meat-based food, small mammals, birds, and insects.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Cats use their whiskers to judge spaces and detect nearby movement."
+  },
+  "caterpillar": {
+    "class_name": "caterpillar",
+    "display_name": "Caterpillar",
+    "description": "The larval stage of butterflies and moths, usually focused on eating and growing.",
+    "habitat": "Leaves, stems, gardens, forests, and crop plants.",
+    "diet": "Mostly herbivore: leaves and plant material.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "A caterpillar transforms into an adult butterfly or moth through metamorphosis."
+  },
+  "chimpanzee": {
+    "class_name": "chimpanzee",
+    "display_name": "Chimpanzee",
+    "description": "A highly intelligent primate with complex social behavior and tool use.",
+    "habitat": "Tropical forests, woodland mosaics, and savannas.",
+    "diet": "Omnivore: fruit, leaves, seeds, insects, and small animals.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Chimpanzees can use sticks and stones as tools."
+  },
+  "cockroach": {
+    "class_name": "cockroach",
+    "display_name": "Cockroach",
+    "description": "A hardy insect that can live in many environments and is often active at night.",
+    "habitat": "Leaf litter, caves, buildings, sewers, and warm damp places.",
+    "diet": "Omnivore: decaying matter, crumbs, plants, and many organic materials.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Cockroaches are ancient insects that existed long before humans."
+  },
+  "cow": {
+    "class_name": "cow",
+    "display_name": "Cow",
+    "description": "A domesticated grazing mammal raised for milk, meat, leather, and farm work.",
+    "habitat": "Farms, pastures, grasslands, and barns.",
+    "diet": "Herbivore: grass, hay, silage, and grains.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Cows are ruminants, meaning they digest food through a multi-chambered stomach."
+  },
+  "coyote": {
+    "class_name": "coyote",
+    "display_name": "Coyote",
+    "description": "A clever wild canine known for adaptability and a wide range of vocal calls.",
+    "habitat": "Grasslands, deserts, forests, suburbs, and farmland.",
+    "diet": "Omnivore: small mammals, birds, fruit, insects, carrion, and scraps.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Coyotes can thrive close to cities by adjusting their behavior."
+  },
+  "crab": {
+    "class_name": "crab",
+    "display_name": "Crab",
+    "description": "A crustacean with a broad body, hard shell, claws, and sideways walking movement.",
+    "habitat": "Oceans, beaches, tide pools, mangroves, rivers, and estuaries.",
+    "diet": "Omnivore: algae, detritus, small animals, and carrion.",
+    "animal_group": "Crustacean",
+    "danger_level": "Low",
+    "fun_fact": "Many crabs can regenerate lost legs over time."
+  },
+  "crow": {
+    "class_name": "crow",
+    "display_name": "Crow",
+    "description": "A highly intelligent black bird known for problem solving, memory, and social behavior.",
+    "habitat": "Forests, farms, towns, cities, and open landscapes.",
+    "diet": "Omnivore: insects, seeds, fruit, eggs, small animals, carrion, and scraps.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Crows can remember human faces and learn from each other."
+  },
+  "deer": {
+    "class_name": "deer",
+    "display_name": "Deer",
+    "description": "A graceful hoofed mammal, often recognized by antlers in males of many species.",
+    "habitat": "Forests, grasslands, wetlands, mountains, and farmland edges.",
+    "diet": "Herbivore: leaves, shoots, grass, bark, fruit, and shrubs.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Antlers are shed and regrown regularly in many deer species."
+  },
+  "dog": {
+    "class_name": "dog",
+    "display_name": "Dog",
+    "description": "A domesticated canine known for loyalty, scent ability, and many working roles.",
+    "habitat": "Homes, farms, cities, and human-managed environments.",
+    "diet": "Omnivore: meat-based food, grains, vegetables, and prepared dog food.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Dogs have an extremely sensitive sense of smell."
+  },
+  "dolphin": {
+    "class_name": "dolphin",
+    "display_name": "Dolphin",
+    "description": "An intelligent marine mammal known for social groups, clicks, whistles, and agile swimming.",
+    "habitat": "Oceans, coastal waters, and some rivers.",
+    "diet": "Carnivore: fish, squid, and crustaceans.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Dolphins use echolocation to find prey underwater."
+  },
+  "donkey": {
+    "class_name": "donkey",
+    "display_name": "Donkey",
+    "description": "A domesticated equine valued for endurance, sure footing, and calm strength.",
+    "habitat": "Farms, drylands, pastures, and villages.",
+    "diet": "Herbivore: grasses, hay, shrubs, and rough vegetation.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Donkeys are often more cautious than horses, which helps them avoid danger."
+  },
+  "dragonfly": {
+    "class_name": "dragonfly",
+    "display_name": "Dragonfly",
+    "description": "A fast flying insect with large eyes, two pairs of wings, and excellent aerial control.",
+    "habitat": "Ponds, lakes, rivers, wetlands, and nearby vegetation.",
+    "diet": "Carnivore: mosquitoes, flies, and other small insects.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Dragonflies can hover, fly backward, and turn sharply in the air."
+  },
+  "duck": {
+    "class_name": "duck",
+    "display_name": "Duck",
+    "description": "A waterbird with webbed feet and a broad bill, commonly seen on ponds and wetlands.",
+    "habitat": "Lakes, rivers, marshes, ponds, and coastal wetlands.",
+    "diet": "Omnivore: aquatic plants, seeds, insects, small fish, and crustaceans.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "A duck's waterproof feathers are maintained with oil from a gland near the tail."
+  },
+  "eagle": {
+    "class_name": "eagle",
+    "display_name": "Eagle",
+    "description": "A large bird of prey with strong talons, sharp vision, and powerful flight.",
+    "habitat": "Mountains, forests, cliffs, wetlands, and open country.",
+    "diet": "Carnivore: fish, birds, mammals, reptiles, and carrion.",
+    "animal_group": "Bird",
+    "danger_level": "Medium",
+    "fun_fact": "Eagles can spot prey from great distances."
+  },
+  "elephant": {
+    "class_name": "elephant",
+    "display_name": "Elephant",
+    "description": "The largest land mammal, known for intelligence, social bonds, trunks, and tusks.",
+    "habitat": "Savannas, forests, grasslands, and wetlands.",
+    "diet": "Herbivore: grasses, bark, leaves, fruit, and roots.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Elephants use their trunks for breathing, smelling, drinking, touching, and grabbing."
+  },
+  "flamingo": {
+    "class_name": "flamingo",
+    "display_name": "Flamingo",
+    "description": "A tall wading bird with pink feathers, long legs, and a curved filter-feeding bill.",
+    "habitat": "Salt lakes, lagoons, mudflats, and shallow wetlands.",
+    "diet": "Algae, tiny crustaceans, and small aquatic organisms.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Flamingos get their pink color from pigments in their food."
+  },
+  "fly": {
+    "class_name": "fly",
+    "display_name": "Fly",
+    "description": "A small winged insect with one pair of wings and quick flight reflexes.",
+    "habitat": "Homes, farms, forests, wetlands, and decaying organic matter.",
+    "diet": "Liquids, nectar, decaying matter, or blood depending on species.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Flies process visual information very quickly, making them hard to swat."
+  },
+  "fox": {
+    "class_name": "fox",
+    "display_name": "Fox",
+    "description": "A small wild canine with a bushy tail, sharp senses, and flexible hunting behavior.",
+    "habitat": "Forests, grasslands, deserts, mountains, farms, and suburbs.",
+    "diet": "Omnivore: rodents, birds, insects, fruit, eggs, and carrion.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Foxes often use sound and pouncing skills to hunt small prey under grass or snow."
+  },
+  "goat": {
+    "class_name": "goat",
+    "display_name": "Goat",
+    "description": "A hardy domesticated hoofed mammal known for climbing ability and browsing behavior.",
+    "habitat": "Farms, rocky hills, drylands, and pastures.",
+    "diet": "Herbivore: leaves, shrubs, grass, vines, and hay.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Goats have rectangular pupils that help them scan wide areas."
+  },
+  "goldfish": {
+    "class_name": "goldfish",
+    "display_name": "Goldfish",
+    "description": "A small freshwater fish often kept in aquariums and ponds.",
+    "habitat": "Aquariums, ponds, and slow freshwater systems.",
+    "diet": "Omnivore: flakes, pellets, algae, plants, and tiny aquatic animals.",
+    "animal_group": "Fish",
+    "danger_level": "Low",
+    "fun_fact": "Goldfish can recognize routines and learn simple feeding cues."
+  },
+  "goose": {
+    "class_name": "goose",
+    "display_name": "Goose",
+    "description": "A large waterbird known for strong pair bonds, loud calls, and seasonal migrations.",
+    "habitat": "Lakes, rivers, wetlands, fields, and parks.",
+    "diet": "Herbivore: grass, aquatic plants, grains, and seeds.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Geese often fly in V-shaped formations to save energy."
+  },
+  "gorilla": {
+    "class_name": "gorilla",
+    "display_name": "Gorilla",
+    "description": "A large intelligent primate with strong social groups led by mature adults.",
+    "habitat": "Tropical and montane forests.",
+    "diet": "Mostly herbivore: leaves, stems, fruit, bark, and shoots.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Gorillas communicate with gestures, vocal sounds, and body postures."
+  },
+  "grasshopper": {
+    "class_name": "grasshopper",
+    "display_name": "Grasshopper",
+    "description": "A jumping insect with powerful hind legs and chewing mouthparts.",
+    "habitat": "Grasslands, fields, gardens, and crop areas.",
+    "diet": "Herbivore: grasses, leaves, and crops.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Grasshoppers can leap many times their own body length."
+  },
+  "hamster": {
+    "class_name": "hamster",
+    "display_name": "Hamster",
+    "description": "A small burrowing rodent often kept as a pet, known for cheek pouches.",
+    "habitat": "Dry grasslands, deserts, burrows, and homes as pets.",
+    "diet": "Omnivore: seeds, grains, vegetables, fruit, and small insects.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Hamsters store food in expandable cheek pouches."
+  },
+  "hare": {
+    "class_name": "hare",
+    "display_name": "Hare",
+    "description": "A fast-running mammal related to rabbits, usually with longer legs and ears.",
+    "habitat": "Grasslands, open fields, tundra, deserts, and farmland.",
+    "diet": "Herbivore: grasses, herbs, bark, and twigs.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Hares are born furred and with open eyes, unlike many rabbits."
+  },
+  "hedgehog": {
+    "class_name": "hedgehog",
+    "display_name": "Hedgehog",
+    "description": "A small mammal covered in protective spines and often active at night.",
+    "habitat": "Gardens, hedgerows, forests, grasslands, and scrub.",
+    "diet": "Omnivore: insects, worms, snails, fruit, and small animals.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Hedgehogs can roll into a tight ball when threatened."
+  },
+  "hippopotamus": {
+    "class_name": "hippopotamus",
+    "display_name": "Hippopotamus",
+    "description": "A massive semi-aquatic mammal with a broad mouth and strong territorial behavior.",
+    "habitat": "Rivers, lakes, wetlands, and nearby grasslands.",
+    "diet": "Herbivore: mainly grasses.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Hippos spend much of the day in water to stay cool."
+  },
+  "hornbill": {
+    "class_name": "hornbill",
+    "display_name": "Hornbill",
+    "description": "A bird known for a large curved bill, often with a casque on top.",
+    "habitat": "Tropical forests, woodlands, and savannas.",
+    "diet": "Omnivore: fruit, insects, small reptiles, and small mammals.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Some hornbill females seal themselves inside tree cavities while nesting."
+  },
+  "horse": {
+    "class_name": "horse",
+    "display_name": "Horse",
+    "description": "A domesticated hoofed mammal known for speed, strength, and long partnership with humans.",
+    "habitat": "Farms, stables, grasslands, and managed pastures.",
+    "diet": "Herbivore: grass, hay, grains, and forage.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Horses can sleep both standing up and lying down."
+  },
+  "hummingbird": {
+    "class_name": "hummingbird",
+    "display_name": "Hummingbird",
+    "description": "A tiny bird with rapid wingbeats and the ability to hover while feeding.",
+    "habitat": "Forests, gardens, meadows, and tropical habitats.",
+    "diet": "Nectar, tiny insects, and spiders.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Hummingbirds can beat their wings dozens of times per second."
+  },
+  "hyena": {
+    "class_name": "hyena",
+    "display_name": "Hyena",
+    "description": "A strong carnivorous mammal known for powerful jaws and complex social groups.",
+    "habitat": "Savannas, grasslands, scrublands, and semi-deserts.",
+    "diet": "Carnivore: hunted prey, carrion, and bones.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Hyenas can crush bones with their powerful jaws."
+  },
+  "jellyfish": {
+    "class_name": "jellyfish",
+    "display_name": "Jellyfish",
+    "description": "A soft-bodied aquatic animal with a bell-shaped body and trailing tentacles.",
+    "habitat": "Oceans, coastal waters, and some brackish environments.",
+    "diet": "Carnivore: plankton, fish eggs, larvae, and small marine animals.",
+    "animal_group": "Cnidarian",
+    "danger_level": "Medium",
+    "fun_fact": "Some jellyfish have existed in similar forms for hundreds of millions of years."
+  },
+  "kangaroo": {
+    "class_name": "kangaroo",
+    "display_name": "Kangaroo",
+    "description": "A marsupial with powerful hind legs, a long tail, and hopping movement.",
+    "habitat": "Grasslands, woodlands, scrublands, and open plains.",
+    "diet": "Herbivore: grasses, leaves, and shrubs.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Female kangaroos carry their young in a pouch."
+  },
+  "koala": {
+    "class_name": "koala",
+    "display_name": "Koala",
+    "description": "A tree-dwelling marsupial known for eating eucalyptus leaves and sleeping for long periods.",
+    "habitat": "Eucalyptus forests and woodlands.",
+    "diet": "Herbivore: mainly eucalyptus leaves.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Koalas have a specialized digestive system for tough eucalyptus leaves."
+  },
+  "ladybugs": {
+    "class_name": "ladybugs",
+    "display_name": "Ladybug",
+    "description": "A small rounded beetle often recognized by bright red or orange wing covers with spots.",
+    "habitat": "Gardens, fields, forests, and crop plants.",
+    "diet": "Mostly aphids and other small plant pests.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Ladybugs help gardeners by eating aphids."
+  },
+  "leopard": {
+    "class_name": "leopard",
+    "display_name": "Leopard",
+    "description": "A spotted big cat known for stealth, strength, and excellent climbing ability.",
+    "habitat": "Forests, savannas, mountains, grasslands, and scrublands.",
+    "diet": "Carnivore: antelope, monkeys, birds, rodents, and other animals.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Leopards often carry prey into trees to keep it safe."
+  },
+  "lion": {
+    "class_name": "lion",
+    "display_name": "Lion",
+    "description": "A large social big cat that lives in groups called prides.",
+    "habitat": "Savannas, grasslands, scrublands, and open woodlands.",
+    "diet": "Carnivore: large and medium-sized mammals.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Lions are among the most social of the big cats."
+  },
+  "lizard": {
+    "class_name": "lizard",
+    "display_name": "Lizard",
+    "description": "A reptile with scaly skin, usually four legs, and a wide range of body sizes.",
+    "habitat": "Deserts, forests, grasslands, rocks, trees, and human areas.",
+    "diet": "Mostly insects, plants, fruit, or small animals depending on species.",
+    "animal_group": "Reptile",
+    "danger_level": "Low",
+    "fun_fact": "Some lizards can detach their tails to escape predators."
+  },
+  "lobster": {
+    "class_name": "lobster",
+    "display_name": "Lobster",
+    "description": "A marine crustacean with a hard shell, long antennae, and strong claws in many species.",
+    "habitat": "Rocky sea floors, reefs, and coastal waters.",
+    "diet": "Omnivore: fish, mollusks, algae, detritus, and small marine animals.",
+    "animal_group": "Crustacean",
+    "danger_level": "Low",
+    "fun_fact": "Lobsters grow by molting their hard outer shell."
+  },
+  "mosquito": {
+    "class_name": "mosquito",
+    "display_name": "Mosquito",
+    "description": "A small flying insect, with females of many species feeding on blood to produce eggs.",
+    "habitat": "Wetlands, ponds, puddles, forests, and urban areas with standing water.",
+    "diet": "Nectar; females of many species also feed on blood.",
+    "animal_group": "Insect",
+    "danger_level": "Medium",
+    "fun_fact": "Only female mosquitoes bite in many species."
+  },
+  "moth": {
+    "class_name": "moth",
+    "display_name": "Moth",
+    "description": "A winged insect related to butterflies, often active at night.",
+    "habitat": "Forests, gardens, fields, caves, and homes.",
+    "diet": "Nectar as adults; leaves, fabric fibers, or stored food as larvae depending on species.",
+    "animal_group": "Insect",
+    "danger_level": "Low",
+    "fun_fact": "Many moths navigate using natural light from the moon and stars."
+  },
+  "mouse": {
+    "class_name": "mouse",
+    "display_name": "Mouse",
+    "description": "A small rodent with a pointed snout, large ears, and quick movements.",
+    "habitat": "Fields, forests, farms, homes, and storage areas.",
+    "diet": "Omnivore: seeds, grains, fruit, insects, and scraps.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Mice communicate using sounds, scents, and body language."
+  },
+  "octopus": {
+    "class_name": "octopus",
+    "display_name": "Octopus",
+    "description": "A highly intelligent marine mollusk with eight arms, soft body, and camouflage ability.",
+    "habitat": "Coral reefs, rocky sea floors, tide pools, and deep ocean areas.",
+    "diet": "Carnivore: crabs, shellfish, fish, and other marine animals.",
+    "animal_group": "Mollusk",
+    "danger_level": "Medium",
+    "fun_fact": "Octopuses can change color and texture to blend into their surroundings."
+  },
+  "okapi": {
+    "class_name": "okapi",
+    "display_name": "Okapi",
+    "description": "A forest-dwelling hoofed mammal related to giraffes, with striped legs and a long tongue.",
+    "habitat": "Dense tropical rainforests.",
+    "diet": "Herbivore: leaves, buds, fruit, ferns, and fungi.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Okapis are close relatives of giraffes despite their zebra-like leg stripes."
+  },
+  "orangutan": {
+    "class_name": "orangutan",
+    "display_name": "Orangutan",
+    "description": "A highly intelligent great ape adapted for life in trees.",
+    "habitat": "Tropical rainforests and swamp forests.",
+    "diet": "Mostly fruit, plus leaves, bark, insects, and eggs.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Orangutans build new sleeping nests in trees."
+  },
+  "otter": {
+    "class_name": "otter",
+    "display_name": "Otter",
+    "description": "A playful semi-aquatic mammal with dense fur and strong swimming ability.",
+    "habitat": "Rivers, lakes, wetlands, coastal waters, and kelp forests.",
+    "diet": "Carnivore: fish, crustaceans, mollusks, frogs, and small animals.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Some otters use rocks as tools to open shellfish."
+  },
+  "owl": {
+    "class_name": "owl",
+    "display_name": "Owl",
+    "description": "A nocturnal bird of prey with forward-facing eyes, silent flight, and sharp hearing.",
+    "habitat": "Forests, grasslands, deserts, barns, and urban edges.",
+    "diet": "Carnivore: rodents, birds, insects, reptiles, and fish.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Many owls can fly almost silently because of special feather edges."
+  },
+  "ox": {
+    "class_name": "ox",
+    "display_name": "Ox",
+    "description": "A trained cattle animal traditionally used for pulling carts, plows, and heavy loads.",
+    "habitat": "Farms, fields, pastures, and rural work areas.",
+    "diet": "Herbivore: grass, hay, grains, and forage.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Oxen are valued for strength, patience, and steady movement."
+  },
+  "oyster": {
+    "class_name": "oyster",
+    "display_name": "Oyster",
+    "description": "A shelled marine mollusk that filters water and often lives attached to hard surfaces.",
+    "habitat": "Coastal waters, estuaries, reefs, and tidal zones.",
+    "diet": "Microscopic plankton and particles filtered from water.",
+    "animal_group": "Mollusk",
+    "danger_level": "Low",
+    "fun_fact": "Oyster reefs can provide shelter for many other marine species."
+  },
+  "panda": {
+    "class_name": "panda",
+    "display_name": "Panda",
+    "description": "A black-and-white bear famous for eating bamboo and living in mountain forests.",
+    "habitat": "Temperate mountain forests with bamboo.",
+    "diet": "Mostly bamboo, with occasional other plants or small animals.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Pandas have a wrist bone that works like a thumb to grip bamboo."
+  },
+  "parrot": {
+    "class_name": "parrot",
+    "display_name": "Parrot",
+    "description": "A colorful intelligent bird with a strong curved beak and vocal learning ability.",
+    "habitat": "Tropical forests, woodlands, savannas, and homes as pets.",
+    "diet": "Seeds, fruit, nuts, flowers, nectar, and sometimes insects.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Some parrots can imitate sounds and human speech."
+  },
+  "pelecaniformes": {
+    "class_name": "pelecaniformes",
+    "display_name": "Pelecaniform Bird",
+    "description": "A group of water-associated birds that includes pelicans, herons, ibises, and related species.",
+    "habitat": "Coasts, lakes, rivers, wetlands, marshes, and estuaries.",
+    "diet": "Fish, amphibians, crustaceans, insects, and other aquatic animals.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Many pelecaniform birds are skilled hunters in shallow water."
+  },
+  "penguin": {
+    "class_name": "penguin",
+    "display_name": "Penguin",
+    "description": "A flightless seabird adapted for swimming with flipper-like wings.",
+    "habitat": "Southern oceans, coasts, islands, and cold or temperate marine regions.",
+    "diet": "Carnivore: fish, krill, and squid.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Penguins are excellent swimmers but cannot fly."
+  },
+  "pig": {
+    "class_name": "pig",
+    "display_name": "Pig",
+    "description": "A domesticated mammal with a strong snout, high intelligence, and flexible diet.",
+    "habitat": "Farms, barns, pastures, and managed pens.",
+    "diet": "Omnivore: grains, roots, vegetables, fruit, and prepared feed.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Pigs are intelligent and can learn routines quickly."
+  },
+  "pigeon": {
+    "class_name": "pigeon",
+    "display_name": "Pigeon",
+    "description": "A common bird well adapted to cities, cliffs, farms, and human environments.",
+    "habitat": "Cities, farms, cliffs, bridges, parks, and open areas.",
+    "diet": "Seeds, grains, fruit, and food scraps.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Pigeons have strong homing ability and can navigate over long distances."
+  },
+  "porcupine": {
+    "class_name": "porcupine",
+    "display_name": "Porcupine",
+    "description": "A rodent protected by sharp quills used as defense against predators.",
+    "habitat": "Forests, deserts, rocky areas, grasslands, and shrublands.",
+    "diet": "Herbivore: bark, leaves, twigs, roots, and fruit.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Porcupine quills detach easily but are not shot out."
+  },
+  "possum": {
+    "class_name": "possum",
+    "display_name": "Possum",
+    "description": "A small to medium marsupial known for climbing and flexible feeding habits.",
+    "habitat": "Forests, suburbs, gardens, and tree hollows.",
+    "diet": "Omnivore: fruit, leaves, insects, eggs, small animals, and scraps.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Some possums use their tails for balance while climbing."
+  },
+  "raccoon": {
+    "class_name": "raccoon",
+    "display_name": "Raccoon",
+    "description": "A clever nocturnal mammal with a masked face and highly sensitive front paws.",
+    "habitat": "Forests, wetlands, suburbs, cities, and river edges.",
+    "diet": "Omnivore: fruit, insects, eggs, fish, small animals, and scraps.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Raccoons use their front paws to explore objects with great detail."
+  },
+  "rat": {
+    "class_name": "rat",
+    "display_name": "Rat",
+    "description": "A highly adaptable rodent found in many natural and urban environments.",
+    "habitat": "Cities, farms, sewers, forests, fields, and storage areas.",
+    "diet": "Omnivore: grains, fruit, insects, meat, and food waste.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Rats are social animals and can learn routes and tasks quickly."
+  },
+  "reindeer": {
+    "class_name": "reindeer",
+    "display_name": "Reindeer",
+    "description": "A cold-adapted deer known for migration and antlers in both males and many females.",
+    "habitat": "Arctic tundra, boreal forests, and cold open landscapes.",
+    "diet": "Herbivore: lichens, mosses, grasses, leaves, and shrubs.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Reindeer hooves change with the seasons to handle snow and soft ground."
+  },
+  "rhinoceros": {
+    "class_name": "rhinoceros",
+    "display_name": "Rhinoceros",
+    "description": "A large thick-skinned herbivore known for one or two horns and powerful body size.",
+    "habitat": "Grasslands, savannas, forests, and wetlands.",
+    "diet": "Herbivore: grass, leaves, shoots, fruit, and branches.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Rhino horns are made of keratin, the same material found in human hair and nails."
+  },
+  "sandpiper": {
+    "class_name": "sandpiper",
+    "display_name": "Sandpiper",
+    "description": "A small shorebird that probes mud or sand for tiny animals.",
+    "habitat": "Beaches, mudflats, marshes, riverbanks, and wetlands.",
+    "diet": "Insects, worms, small crustaceans, mollusks, and other tiny invertebrates.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Many sandpipers migrate very long distances each year."
+  },
+  "seahorse": {
+    "class_name": "seahorse",
+    "display_name": "Seahorse",
+    "description": "A small marine fish with a horse-like head, curled tail, and upright swimming posture.",
+    "habitat": "Seagrass beds, coral reefs, mangroves, and shallow coastal waters.",
+    "diet": "Tiny crustaceans and plankton.",
+    "animal_group": "Fish",
+    "danger_level": "Low",
+    "fun_fact": "Male seahorses carry developing young in a pouch."
+  },
+  "seal": {
+    "class_name": "seal",
+    "display_name": "Seal",
+    "description": "A marine mammal with flippers, streamlined body, and strong diving ability.",
+    "habitat": "Coastal waters, polar regions, rocky shores, and ice floes.",
+    "diet": "Carnivore: fish, squid, crustaceans, and other marine animals.",
+    "animal_group": "Mammal",
+    "danger_level": "Medium",
+    "fun_fact": "Some seals can hold their breath for long dives."
+  },
+  "shark": {
+    "class_name": "shark",
+    "display_name": "Shark",
+    "description": "A cartilaginous fish with sharp senses, streamlined body, and many ecological roles.",
+    "habitat": "Oceans, reefs, coastal waters, open seas, and some rivers.",
+    "diet": "Carnivore: fish, seals, squid, rays, crustaceans, or plankton depending on species.",
+    "animal_group": "Fish",
+    "danger_level": "High",
+    "fun_fact": "Sharks can detect tiny electrical signals produced by other animals."
+  },
+  "sheep": {
+    "class_name": "sheep",
+    "display_name": "Sheep",
+    "description": "A domesticated grazing mammal raised for wool, milk, and meat.",
+    "habitat": "Farms, pastures, hillsides, and grasslands.",
+    "diet": "Herbivore: grass, hay, clover, and forage.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Sheep can recognize familiar faces in their flock."
+  },
+  "snake": {
+    "class_name": "snake",
+    "display_name": "Snake",
+    "description": "A legless reptile with a flexible body and diverse hunting strategies.",
+    "habitat": "Forests, deserts, grasslands, wetlands, farms, and water bodies.",
+    "diet": "Carnivore: rodents, birds, eggs, frogs, fish, insects, or other reptiles.",
+    "animal_group": "Reptile",
+    "danger_level": "Medium",
+    "fun_fact": "Snakes smell by collecting scent particles with their tongues."
+  },
+  "sparrow": {
+    "class_name": "sparrow",
+    "display_name": "Sparrow",
+    "description": "A small seed-eating bird commonly found near people and open habitats.",
+    "habitat": "Cities, farms, gardens, grasslands, and shrublands.",
+    "diet": "Seeds, grains, insects, and small plant material.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Sparrows often live close to humans and adapt well to urban life."
+  },
+  "squid": {
+    "class_name": "squid",
+    "display_name": "Squid",
+    "description": "A fast-swimming marine mollusk with arms, tentacles, and jet propulsion.",
+    "habitat": "Open ocean, coastal waters, reefs, and deep seas.",
+    "diet": "Carnivore: fish, shrimp, crustaceans, and other squid.",
+    "animal_group": "Mollusk",
+    "danger_level": "Low",
+    "fun_fact": "Squid can release ink as a defense against predators."
+  },
+  "squirrel": {
+    "class_name": "squirrel",
+    "display_name": "Squirrel",
+    "description": "A small agile rodent known for climbing, jumping, and storing food.",
+    "habitat": "Forests, parks, gardens, urban trees, and grasslands.",
+    "diet": "Omnivore: nuts, seeds, fruit, fungi, insects, and buds.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Squirrels often bury extra food and may forget some caches, helping trees spread."
+  },
+  "starfish": {
+    "class_name": "starfish",
+    "display_name": "Starfish",
+    "description": "A sea star with radial arms, tube feet, and strong regeneration ability in many species.",
+    "habitat": "Tide pools, coral reefs, rocky shores, and sea floors.",
+    "diet": "Carnivore: clams, mussels, small animals, and detritus.",
+    "animal_group": "Echinoderm",
+    "danger_level": "Low",
+    "fun_fact": "Many sea stars can regrow lost arms."
+  },
+  "swan": {
+    "class_name": "swan",
+    "display_name": "Swan",
+    "description": "A large graceful waterbird with a long neck and strong pair bonds.",
+    "habitat": "Lakes, rivers, wetlands, ponds, and coastal waters.",
+    "diet": "Aquatic plants, algae, grasses, and small aquatic animals.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Swans often form long-term pair bonds."
+  },
+  "tiger": {
+    "class_name": "tiger",
+    "display_name": "Tiger",
+    "description": "A powerful striped big cat and solitary hunter.",
+    "habitat": "Forests, grasslands, mangroves, and wetlands.",
+    "diet": "Carnivore: deer, wild pigs, buffalo, and other medium to large prey.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Every tiger has a unique stripe pattern."
+  },
+  "turkey": {
+    "class_name": "turkey",
+    "display_name": "Turkey",
+    "description": "A large ground bird with a fan-shaped tail and distinctive calls.",
+    "habitat": "Forests, grasslands, farms, and woodland edges.",
+    "diet": "Omnivore: seeds, nuts, berries, insects, and small reptiles.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Wild turkeys can fly short distances despite their size."
+  },
+  "turtle": {
+    "class_name": "turtle",
+    "display_name": "Turtle",
+    "description": "A reptile with a protective shell and species adapted to land, freshwater, or sea.",
+    "habitat": "Oceans, rivers, lakes, wetlands, forests, and grasslands.",
+    "diet": "Plants, algae, insects, fish, jellyfish, or carrion depending on species.",
+    "animal_group": "Reptile",
+    "danger_level": "Low",
+    "fun_fact": "A turtle's shell is part of its skeleton."
+  },
+  "whale": {
+    "class_name": "whale",
+    "display_name": "Whale",
+    "description": "A large marine mammal that breathes air and lives entirely in water.",
+    "habitat": "Oceans from polar waters to tropical seas.",
+    "diet": "Krill, plankton, fish, or squid depending on species.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Some whales communicate with complex songs across long distances."
+  },
+  "wolf": {
+    "class_name": "wolf",
+    "display_name": "Wolf",
+    "description": "A social wild canine that hunts and travels in family groups called packs.",
+    "habitat": "Forests, tundra, mountains, grasslands, and deserts.",
+    "diet": "Carnivore: deer, elk, smaller mammals, carrion, and occasional fruit.",
+    "animal_group": "Mammal",
+    "danger_level": "High",
+    "fun_fact": "Wolf packs use howls to communicate across distance."
+  },
+  "wombat": {
+    "class_name": "wombat",
+    "display_name": "Wombat",
+    "description": "A burrowing marsupial with a compact body, strong claws, and slow steady movement.",
+    "habitat": "Forests, grasslands, and scrublands.",
+    "diet": "Herbivore: grasses, roots, bark, and sedges.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Wombats produce cube-shaped droppings."
+  },
+  "woodpecker": {
+    "class_name": "woodpecker",
+    "display_name": "Woodpecker",
+    "description": "A tree-climbing bird known for drilling into wood with a strong beak.",
+    "habitat": "Forests, woodlands, orchards, parks, and gardens.",
+    "diet": "Insects, larvae, sap, fruit, nuts, and seeds.",
+    "animal_group": "Bird",
+    "danger_level": "Low",
+    "fun_fact": "Woodpeckers have shock-absorbing skull structures that help protect the brain."
+  },
+  "zebra": {
+    "class_name": "zebra",
+    "display_name": "Zebra",
+    "description": "A striped wild equine that lives in herds and grazes across open landscapes.",
+    "habitat": "Savannas, grasslands, shrublands, and open woodlands.",
+    "diet": "Herbivore: grasses, leaves, bark, and shrubs.",
+    "animal_group": "Mammal",
+    "danger_level": "Low",
+    "fun_fact": "Each zebra has a unique stripe pattern."
+  }
+}
