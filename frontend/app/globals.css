@@ -13,6 +13,8 @@
   --sky-700: #226174;
   --line: rgba(31, 23, 20, 0.14);
   --shadow: 0 24px 80px rgba(124, 16, 15, 0.16);
+  --font-archivo: Arial, "Helvetica Neue", sans-serif;
+  --font-space: "Trebuchet MS", Arial, sans-serif;
 }
 
 * {
@@ -335,7 +337,7 @@ img {
   display: grid;
   grid-template-columns: minmax(280px, 0.86fr) minmax(0, 1.14fr);
   gap: 22px;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .card,
@@ -581,7 +583,7 @@ img {
 .profile-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: end;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 18px;
   margin-bottom: 24px;
@@ -641,7 +643,7 @@ img {
 
 .animal-title {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 12px;
 }
