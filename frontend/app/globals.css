@@ -13,8 +13,8 @@
   --sky-700: #226174;
   --line: rgba(31, 23, 20, 0.14);
   --shadow: 0 24px 80px rgba(124, 16, 15, 0.16);
-  --font-archivo: Arial, "Helvetica Neue", sans-serif;
-  --font-space: "Trebuchet MS", Arial, sans-serif;
+  --font-sans: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
@@ -32,7 +32,7 @@ body {
     radial-gradient(circle at 12% 10%, rgba(247, 216, 127, 0.42), transparent 28rem),
     linear-gradient(135deg, #fffaf0 0%, #f8ebab 42%, #f7d87f 100%);
   color: var(--ink-950);
-  font-family: var(--font-archivo), Arial, sans-serif;
+  font-family: var(--font-sans);
 }
 
 button,
@@ -88,7 +88,7 @@ img {
   gap: 10px;
   min-height: 44px;
   padding: 0 10px;
-  font-family: var(--font-space), Arial, sans-serif;
+  font-family: var(--font-display);
   font-weight: 700;
 }
 
@@ -128,6 +128,37 @@ img {
   outline: none;
 }
 
+.language-switcher {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  min-height: 40px;
+  border: 1px solid rgba(31, 23, 20, 0.14);
+  border-radius: 999px;
+  padding: 4px;
+  background: rgba(255, 250, 240, 0.72);
+}
+
+.language-switcher button {
+  min-width: 42px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink-600);
+  font-size: 0.8rem;
+  font-weight: 900;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.language-switcher button.active,
+.language-switcher button:hover,
+.language-switcher button:focus-visible {
+  background: var(--ember-700);
+  color: var(--paper-50);
+  outline: none;
+}
+
 .shell-main {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
@@ -136,9 +167,9 @@ img {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
-  gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 0.94fr) minmax(360px, 1.06fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
   min-height: calc(100vh - 190px);
 }
 
@@ -146,7 +177,8 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 26px;
+  min-width: 0;
+  gap: 28px;
   padding: 32px 0;
 }
 
@@ -167,10 +199,10 @@ img {
 
 .hero h1 {
   margin: 0;
-  max-width: 760px;
-  font-family: var(--font-space), Arial, sans-serif;
-  font-size: clamp(3.3rem, 8vw, 7.8rem);
-  line-height: 0.84;
+  max-width: min(100%, 560px);
+  font-family: var(--font-display);
+  font-size: clamp(3.3rem, 6.2vw, 6.45rem);
+  line-height: 0.9;
   letter-spacing: 0;
 }
 
@@ -248,6 +280,9 @@ img {
 
 .hero-panel {
   align-self: center;
+  width: 100%;
+  max-width: 560px;
+  justify-self: end;
   overflow: hidden;
   border: 1px solid rgba(190, 26, 26, 0.14);
   border-radius: 28px;
@@ -268,7 +303,7 @@ img {
 
 .specimen-photo {
   position: absolute;
-  inset: 34px 34px 138px 34px;
+  inset: 34px;
   overflow: hidden;
   border: 10px solid rgba(255, 250, 240, 0.88);
   border-radius: 24px;
@@ -278,31 +313,24 @@ img {
   box-shadow: 0 22px 60px rgba(31, 23, 20, 0.22);
 }
 
-.specimen-card {
+.specimen-badge {
   position: absolute;
-  right: 22px;
-  bottom: 22px;
-  left: 22px;
-  border: 1px solid rgba(255, 250, 240, 0.7);
-  border-radius: 20px;
-  padding: 18px;
-  background: rgba(255, 250, 240, 0.9);
+  left: 54px;
+  bottom: 54px;
+  z-index: 2;
+  min-height: 38px;
+  border: 1px solid rgba(255, 250, 240, 0.58);
+  background: rgba(255, 250, 240, 0.88);
   backdrop-filter: blur(16px);
+  box-shadow: 0 14px 34px rgba(31, 23, 20, 0.16);
 }
 
-.specimen-card h2,
 .section-title,
 .card h2,
 .auth-panel h1 {
   margin: 0;
-  font-family: var(--font-space), Arial, sans-serif;
+  font-family: var(--font-display);
   letter-spacing: 0;
-}
-
-.specimen-card p {
-  margin: 8px 0 0;
-  color: var(--ink-600);
-  line-height: 1.55;
 }
 
 .confidence-pill,
@@ -526,6 +554,11 @@ img {
   font-weight: 800;
 }
 
+.field-hint {
+  color: var(--ink-600);
+  font-size: 0.86rem;
+}
+
 .field input {
   width: 100%;
   min-height: 48px;
@@ -650,7 +683,7 @@ img {
 
 .animal-title h2 {
   margin: 0;
-  font-family: var(--font-space), Arial, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
 }
 
@@ -680,7 +713,7 @@ img {
 .stat-card strong {
   display: block;
   margin-top: 10px;
-  font-family: var(--font-space), Arial, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 4rem);
 }
 
@@ -748,6 +781,11 @@ img {
     min-height: auto;
   }
 
+  .hero-panel {
+    justify-self: stretch;
+    max-width: none;
+  }
+
   .auth-art {
     min-height: 260px;
   }
@@ -788,11 +826,16 @@ img {
   }
 
   .specimen-stage {
-    min-height: 430px;
+    min-height: 390px;
   }
 
   .specimen-photo {
-    inset: 20px 20px 150px;
+    inset: 20px;
+  }
+
+  .specimen-badge {
+    left: 36px;
+    bottom: 36px;
   }
 
   .info-grid,

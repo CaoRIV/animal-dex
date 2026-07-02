@@ -7,8 +7,11 @@ import { BarChart3, Images, Layers3, LoaderCircle } from "lucide-react";
 import { getCollection } from "@/lib/api";
 import { supabase } from "@/lib/supabase";
 import type { CollectionItem } from "@/lib/types";
+import { useI18n } from "@/lib/i18n";
+import { localizeSpeciesInfo } from "@/lib/species-info-vi";
 
 export function ProfileStats() {
+  const { language, t } = useI18n();
   const [items, setItems] = useState<CollectionItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -31,28 +34,27 @@ export function ProfileStats() {
   const stats = useMemo(() => {
     const species = new Set(items.map((item) => item.predicted_class));
     const groupCounts = items.reduce<Record<string, number>>((acc, item) => {
-      const group = item.species_info.animal_group || "Unknown";
+      const group = localizeSpeciesInfo(item.species_info, language).animal_group || t("unknown");
       acc[group] = (acc[group] ?? 0) + 1;
       return acc;
     }, {});
-    const topGroup = Object.entries(groupCounts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "Chưa có";
+    const topGroup = Object.entries(groupCounts).sort((a, b) => b[1] - a[1])[0]?.[0] ?? t("none");
     return {
       total: items.length,
       species: species.size,
       topGroup
     };
-  }, [items]);
+  }, [items, language, t]);
 
   return (
     <section>
       <div className="profile-header">
         <div>
-          <span className="eyebrow">Profile statistics</span>
-          <h1 className="section-title">Dấu chân khám phá</h1>
-          <p className="section-subtitle">Theo dõi số ảnh đã lưu, số loài khác nhau và nhóm động vật xuất hiện nhiều nhất.</p>
+          <span className="eyebrow">{t("profileEyebrow")}</span>
+          <h1 className="section-title">{t("profileTitle")}</h1>
         </div>
         <Link className="button button-primary" href="/">
-          Nhận diện thêm
+          {t("identifyMore")}
         </Link>
       </div>
 
@@ -62,9 +64,9 @@ export function ProfileStats() {
         </div>
       ) : (
         <div className="stats-grid">
-          <StatCard icon={<Images size={24} />} label="Ảnh đã lưu" value={stats.total.toString()} />
-          <StatCard icon={<Layers3 size={24} />} label="Loài khác nhau" value={stats.species.toString()} />
-          <StatCard icon={<BarChart3 size={24} />} label="Nhóm nổi bật" value={stats.topGroup} />
+          <StatCard icon={<Images size={24} />} label={t("savedImages")} value={stats.total.toString()} />
+          <StatCard icon={<Layers3 size={24} />} label={t("uniqueSpecies")} value={stats.species.toString()} />
+          <StatCard icon={<BarChart3 size={24} />} label={t("topGroup")} value={stats.topGroup} />
         </div>
       )}
     </section>

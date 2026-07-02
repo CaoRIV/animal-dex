@@ -5,8 +5,10 @@ import type { User } from "@supabase/supabase-js";
 import { LogIn, LogOut } from "lucide-react";
 import Link from "next/link";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
+import { useI18n } from "@/lib/i18n";
 
 export function AuthStatus() {
+  const { t } = useI18n();
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -19,14 +21,14 @@ export function AuthStatus() {
   }, []);
 
   if (!isSupabaseConfigured()) {
-    return <div className="notice">Cần cấu hình Supabase env trước khi đăng nhập và lưu album.</div>;
+    return <div className="notice">{t("supabaseMissing")}</div>;
   }
 
   if (!user) {
     return (
       <Link className="button button-secondary" href="/auth">
         <LogIn size={18} aria-hidden="true" />
-        Đăng nhập để lưu
+        {t("loginToSave")}
       </Link>
     );
   }
@@ -38,7 +40,7 @@ export function AuthStatus() {
       onClick={() => supabase?.auth.signOut()}
     >
       <LogOut size={18} aria-hidden="true" />
-      Đăng xuất
+      {t("logout")}
     </button>
   );
 }
