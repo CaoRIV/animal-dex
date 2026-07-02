@@ -1,0 +1,60 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+build/
+next-env.d.ts
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.local.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local Codex/agent workspace metadata
+.agents/
+.codex/
+
+# Model training temporary outputs
+model/checkpoints/
+model/tmp/
+model/cache/
+model/*.ckpt
+model/*.pb
+model/*.tflite
+
+# Large local datasets should stay outside Git
+data/
+dataset/
+datasets/
+kaggle/input/
