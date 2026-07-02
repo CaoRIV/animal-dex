@@ -45,6 +45,10 @@ Thumbs.db
 .agents/
 .codex/
 
+# Internal planning notes
+plan.md
+guide.md
+
 # Model training temporary outputs
 model/checkpoints/
 model/tmp/
