@@ -1,46 +1,61 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Camera, CheckCircle2, ImageUp, LoaderCircle, Save, ShieldAlert, Sparkles, XCircle } from "lucide-react";
 import Link from "next/link";
 import { predictAnimal, saveCollectionItem, uploadImage } from "@/lib/api";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import type { PredictionResponse } from "@/lib/types";
 import { AuthStatus } from "@/components/AuthStatus";
-
-const confidenceText = {
-  high: "AI khá chắc",
-  uncertain: "AI chưa chắc chắn",
-  low: "Không đủ tự tin"
-};
+import { useI18n } from "@/lib/i18n";
+import { localizeSpeciesDisplayName, localizeSpeciesInfo } from "@/lib/species-info-vi";
 
 export function UploadStudio() {
+  const { language, t } = useI18n();
   const [file, setFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [prediction, setPrediction] = useState<PredictionResponse | null>(null);
+  const [correctedLabel, setCorrectedLabel] = useState("");
+  const [labelEdited, setLabelEdited] = useState(false);
   const [isPredicting, setIsPredicting] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const canSave = Boolean(file && prediction && !isSaving && isSupabaseConfigured());
+  const localizedSpecies = useMemo(
+    () => (prediction ? localizeSpeciesInfo(prediction.species_info, language) : null),
+    [prediction, language]
+  );
+  const localizedDisplayName = useMemo(
+    () => (prediction ? localizeSpeciesDisplayName(prediction.predicted_class, prediction.display_name, language) : ""),
+    [prediction, language]
+  );
 
   const funFact = useMemo(() => {
-    if (!prediction) return null;
-    return prediction.species_info.fun_fact;
-  }, [prediction]);
+    if (!localizedSpecies) return null;
+    return localizedSpecies.fun_fact;
+  }, [localizedSpecies]);
+
+  useEffect(() => {
+    if (prediction && !labelEdited) {
+      setCorrectedLabel(localizedDisplayName);
+    }
+  }, [prediction, localizedDisplayName, labelEdited]);
 
   function handleFileChange(nextFile: File | null) {
     setError(null);
     setMessage(null);
     setPrediction(null);
+    setCorrectedLabel("");
+    setLabelEdited(false);
     setFile(nextFile);
     setPreviewUrl(nextFile ? URL.createObjectURL(nextFile) : null);
   }
 
   async function handlePredict() {
     if (!file) {
-      setError("Chọn một ảnh động vật trước khi nhận diện.");
+      setError(t("needImage"));
       return;
     }
 
@@ -51,8 +66,10 @@ export function UploadStudio() {
     try {
       const result = await predictAnimal(file);
       setPrediction(result);
+      setCorrectedLabel(localizeSpeciesDisplayName(result.predicted_class, result.display_name, language));
+      setLabelEdited(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Không thể nhận diện ảnh.");
+      setError(err instanceof Error ? err.message : t("predictFailed"));
     } finally {
       setIsPredicting(false);
     }
@@ -69,38 +86,60 @@ export function UploadStudio() {
       const { data } = await supabase.auth.getSession();
       const token = data.session?.access_token;
       if (!token) {
-        setError("Bạn cần đăng nhập trước khi lưu vào album.");
+        setError(t("loginRequired"));
         return;
       }
 
       const upload = await uploadImage(file, token);
+      const defaultDisplayName = localizedDisplayName || prediction.display_name;
+      const displayName = correctedLabel.trim() || defaultDisplayName;
+      const labelWasEdited =
+        labelEdited && displayName !== defaultDisplayName && displayName !== prediction.display_name;
+      const predictedClass = labelWasEdited ? toClassName(displayName) : prediction.predicted_class;
+      const savedDisplayName = labelWasEdited ? displayName : prediction.display_name;
+      const speciesInfo = labelWasEdited
+        ? {
+            ...prediction.species_info,
+            class_name: predictedClass,
+            display_name: displayName,
+            description: displayName,
+            habitat: language === "vi" ? "\u0110ang c\u1eadp nh\u1eadt." : "No data yet.",
+            diet: language === "vi" ? "\u0110ang c\u1eadp nh\u1eadt." : "No data yet.",
+            animal_group: language === "vi" ? "Nh\u00e3n ng\u01b0\u1eddi d\u00f9ng" : "User label",
+            danger_level: language === "vi" ? "Kh\u00f4ng r\u00f5" : "Unknown",
+            fun_fact:
+              language === "vi"
+                ? "Nh\u00e3n n\u00e0y \u0111\u01b0\u1ee3c b\u1ea1n ch\u1ec9nh tr\u01b0\u1edbc khi l\u01b0u v\u00e0o album."
+                : "This label was corrected before saving."
+          }
+        : prediction.species_info;
       await saveCollectionItem(
         {
           image_path: upload.image_path,
           image_url: null,
-          predicted_class: prediction.predicted_class,
-          display_name: prediction.display_name,
+          predicted_class: predictedClass,
+          display_name: savedDisplayName,
           confidence: prediction.confidence,
           top_predictions: prediction.top_predictions,
-          species_info: prediction.species_info
+          species_info: speciesInfo
         },
         token
       );
-      setMessage("Đã lưu vào album khám phá.");
+      setMessage(t("saved"));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Không thể lưu kết quả.");
+      setError(err instanceof Error ? err.message : t("saveFailed"));
     } finally {
       setIsSaving(false);
     }
   }
 
   return (
-    <section className="workspace" aria-label="Khu vực nhận diện ảnh động vật">
+    <section className="workspace" aria-label="Animal identification workspace">
       <div className="card">
         <div className="row" style={{ justifyContent: "space-between", marginBottom: 18 }}>
           <div>
-            <h2 className="section-title">Upload ảnh</h2>
-            <p className="section-subtitle">Ảnh rõ, một loài chính trong khung hình sẽ cho kết quả tốt hơn.</p>
+            <h2 className="section-title">{t("uploadTitle")}</h2>
+            <p className="section-subtitle">{t("uploadHint")}</p>
           </div>
           <AuthStatus />
         </div>
@@ -115,14 +154,14 @@ export function UploadStudio() {
           />
           <label htmlFor="animal-image">
             {previewUrl ? (
-              <img className="upload-preview" src={previewUrl} alt="Ảnh động vật đang được chọn" />
+              <img className="upload-preview" src={previewUrl} alt={t("selectedImageAlt")} />
             ) : (
               <div>
                 <span className="upload-icon" aria-hidden="true">
                   <ImageUp size={30} />
                 </span>
-                <strong>Chọn hoặc chụp ảnh</strong>
-                <p className="section-subtitle">JPG, PNG hoặc WebP. Tối đa theo backend: 10MB.</p>
+                <strong>{t("chooseImage")}</strong>
+                <p className="section-subtitle">{t("uploadHint")}</p>
               </div>
             )}
           </label>
@@ -131,11 +170,11 @@ export function UploadStudio() {
         <div className="row" style={{ marginTop: 16 }}>
           <button className="button button-primary" type="button" onClick={handlePredict} disabled={isPredicting}>
             {isPredicting ? <LoaderCircle className="loading" size={18} /> : <Sparkles size={18} />}
-            {isPredicting ? "Đang nhận diện" : "Nhận diện bằng AI"}
+            {isPredicting ? t("predictLoading") : t("predictIdle")}
           </button>
           <button className="button button-secondary" type="button" onClick={() => handleFileChange(null)}>
             <XCircle size={18} />
-            Xóa ảnh
+            {t("clearImage")}
           </button>
         </div>
       </div>
@@ -148,10 +187,8 @@ export function UploadStudio() {
           <div className="card empty-state">
             <div>
               <Camera size={42} aria-hidden="true" />
-              <h2 className="section-title">Kết quả sẽ hiện ở đây</h2>
-              <p className="section-subtitle">
-                AnimalDex sẽ trả về loài dự đoán, độ tin cậy, top-3 khả năng và thông tin ngắn về loài.
-              </p>
+              <h2 className="section-title">{t("emptyResultTitle")}</h2>
+              <p className="section-subtitle">{t("emptyResultBody")}</p>
             </div>
           </div>
         ) : (
@@ -160,29 +197,47 @@ export function UploadStudio() {
               <div>
                 <span className={`confidence-pill ${prediction.confidence_label}`}>
                   {prediction.confidence_label === "high" ? <CheckCircle2 size={16} /> : <ShieldAlert size={16} />}
-                  {confidenceText[prediction.confidence_label]}
+                  {prediction.confidence_label === "high"
+                    ? t("highConfidence")
+                    : prediction.confidence_label === "uncertain"
+                      ? t("uncertainConfidence")
+                      : t("lowConfidence")}
                 </span>
-                <h2>{prediction.display_name}</h2>
-                <p className="section-subtitle">{prediction.species_info.description}</p>
+                <h2>{localizedDisplayName}</h2>
+                <p className="section-subtitle">{localizedSpecies?.description}</p>
               </div>
               <strong>{Math.round(prediction.confidence * 100)}%</strong>
             </div>
 
             <div className="info-grid">
-              <InfoTile label="Môi trường sống" value={prediction.species_info.habitat} />
-              <InfoTile label="Chế độ ăn" value={prediction.species_info.diet} />
-              <InfoTile label="Nhóm" value={prediction.species_info.animal_group} />
-              <InfoTile label="Mức độ nguy hiểm" value={prediction.species_info.danger_level} />
+              <InfoTile label={t("habitat")} value={localizedSpecies?.habitat ?? ""} />
+              <InfoTile label={t("diet")} value={localizedSpecies?.diet ?? ""} />
+              <InfoTile label={t("group")} value={localizedSpecies?.animal_group ?? ""} />
+              <InfoTile label={t("danger")} value={localizedSpecies?.danger_level ?? ""} />
             </div>
 
             {funFact ? <div className="notice">{funFact}</div> : null}
 
+            <div className="field">
+              <label htmlFor="corrected-label">{t("correctLabel")}</label>
+              <input
+                id="corrected-label"
+                type="text"
+                value={correctedLabel}
+                onChange={(event) => {
+                  setCorrectedLabel(event.target.value);
+                  setLabelEdited(true);
+                }}
+              />
+              <span className="field-hint">{t("correctionHint")}</span>
+            </div>
+
             <div>
-              <h3>Top-3 dự đoán</h3>
+              <h3>{t("topPredictions")}</h3>
               <div className="prediction-list">
                 {prediction.top_predictions.map((item) => (
                   <div className="prediction-row" key={item.class_name}>
-                    <strong>{item.display_name}</strong>
+                    <strong>{localizeSpeciesDisplayName(item.class_name, item.display_name, language)}</strong>
                     <div className="meter" aria-hidden="true">
                       <span style={{ width: `${Math.round(item.confidence * 100)}%` }} />
                     </div>
@@ -195,10 +250,10 @@ export function UploadStudio() {
             <div className="row">
               <button className="button button-primary" type="button" disabled={!canSave} onClick={handleSave}>
                 {isSaving ? <LoaderCircle className="loading" size={18} /> : <Save size={18} />}
-                {isSaving ? "Đang lưu" : "Save to Collection"}
+                {isSaving ? t("saveLoading") : t("saveIdle")}
               </button>
               <Link className="button button-secondary" href="/collection">
-                Xem album
+                {t("viewAlbum")}
               </Link>
             </div>
           </div>
@@ -206,6 +261,16 @@ export function UploadStudio() {
       </div>
     </section>
   );
+}
+
+function toClassName(label: string) {
+  return label
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "") || "user_label";
 }
 
 function InfoTile({ label, value }: { label: string; value: string }) {

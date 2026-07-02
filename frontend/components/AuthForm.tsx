@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { KeyRound, LogIn, Mail } from "lucide-react";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
+import { useI18n } from "@/lib/i18n";
 
 export function AuthForm() {
   const router = useRouter();
+  const { t } = useI18n();
   const [mode, setMode] = useState<"login" | "signup">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +37,7 @@ export function AuthForm() {
     }
 
     if (mode === "signup") {
-      setMessage("Tài khoản đã được tạo. Nếu Supabase bật email confirmation, hãy xác nhận email trước.");
+      setMessage(t("signupCreated"));
       return;
     }
 
@@ -45,42 +47,42 @@ export function AuthForm() {
   return (
     <section className="auth-shell">
       <div className="auth-panel">
-        <div className="auth-art" role="img" aria-label="Ảnh minh họa voi trong thiên nhiên" />
+        <div className="auth-art" role="img" aria-label={t("authArtAlt")} />
         <form className="auth-form" onSubmit={handleSubmit}>
           <div>
             <span className="eyebrow">
               <KeyRound size={16} aria-hidden="true" />
-              Supabase Auth
+              {t("authEyebrow")}
             </span>
-            <h1>{mode === "login" ? "Đăng nhập AnimalDex" : "Tạo tài khoản"}</h1>
-            <p className="section-subtitle">Đăng nhập để lưu ảnh đã nhận diện vào album cá nhân.</p>
+            <h1>{mode === "login" ? t("loginTitle") : t("signupTitle")}</h1>
+            <p className="section-subtitle">{t("authLead")}</p>
           </div>
 
-          <div className="segmented" role="tablist" aria-label="Chọn chế độ tài khoản">
+          <div className="segmented" role="tablist" aria-label="Account mode">
             <button
               className={mode === "login" ? "active" : ""}
               type="button"
               onClick={() => setMode("login")}
             >
-              Đăng nhập
+              {t("loginTab")}
             </button>
             <button
               className={mode === "signup" ? "active" : ""}
               type="button"
               onClick={() => setMode("signup")}
             >
-              Đăng ký
+              {t("signupTab")}
             </button>
           </div>
 
           {!isSupabaseConfigured() ? (
-            <div className="notice error">Chưa cấu hình `NEXT_PUBLIC_SUPABASE_URL` và `NEXT_PUBLIC_SUPABASE_ANON_KEY`.</div>
+            <div className="notice error">{t("supabaseMissing")}</div>
           ) : null}
           {error ? <div className="notice error">{error}</div> : null}
           {message ? <div className="notice">{message}</div> : null}
 
           <div className="field">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t("email")}</label>
             <input
               autoComplete="email"
               id="email"
@@ -92,7 +94,7 @@ export function AuthForm() {
             />
           </div>
           <div className="field">
-            <label htmlFor="password">Mật khẩu</label>
+            <label htmlFor="password">{t("password")}</label>
             <input
               autoComplete={mode === "login" ? "current-password" : "new-password"}
               id="password"
@@ -105,7 +107,7 @@ export function AuthForm() {
           </div>
           <button className="button button-primary" disabled={isSubmitting || !isSupabaseConfigured()} type="submit">
             {mode === "login" ? <LogIn size={18} /> : <Mail size={18} />}
-            {isSubmitting ? "Đang xử lý" : mode === "login" ? "Đăng nhập" : "Đăng ký"}
+            {isSubmitting ? t("submitting") : mode === "login" ? t("loginTab") : t("signupTab")}
           </button>
         </form>
       </div>
