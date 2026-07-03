@@ -105,12 +105,12 @@ export function UploadStudio() {
             description: displayName,
             habitat: language === "vi" ? "\u0110ang c\u1eadp nh\u1eadt." : "No data yet.",
             diet: language === "vi" ? "\u0110ang c\u1eadp nh\u1eadt." : "No data yet.",
-            animal_group: language === "vi" ? "Nh\u00e3n ng\u01b0\u1eddi d\u00f9ng" : "User label",
+            animal_group: language === "vi" ? "Do b\u1ea1n \u0111\u1eb7t t\u00ean" : "Named by you",
             danger_level: language === "vi" ? "Kh\u00f4ng r\u00f5" : "Unknown",
             fun_fact:
               language === "vi"
-                ? "Nh\u00e3n n\u00e0y \u0111\u01b0\u1ee3c b\u1ea1n ch\u1ec9nh tr\u01b0\u1edbc khi l\u01b0u v\u00e0o album."
-                : "This label was corrected before saving."
+                ? "T\u00ean n\u00e0y \u0111\u01b0\u1ee3c b\u1ea1n ch\u1ec9nh l\u1ea1i tr\u01b0\u1edbc khi l\u01b0u v\u00e0o album."
+                : "You adjusted this name before saving it to the album."
           }
         : prediction.species_info;
       await saveCollectionItem(

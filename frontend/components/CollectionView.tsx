@@ -2,17 +2,18 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { ImageOff, LoaderCircle, Trash2 } from "lucide-react";
+import { ImageOff, LoaderCircle, Trash2, X } from "lucide-react";
 import { deleteCollectionItem, getCollection } from "@/lib/api";
 import { isSupabaseConfigured, supabase } from "@/lib/supabase";
 import type { CollectionItem } from "@/lib/types";
 import { useI18n } from "@/lib/i18n";
-import { localizeSpeciesInfo } from "@/lib/species-info-vi";
+import { localizeSpeciesDisplayName, localizeSpeciesInfo } from "@/lib/species-info-vi";
 
 export function CollectionView() {
   const { language, t } = useI18n();
   const [items, setItems] = useState<CollectionItem[]>([]);
   const [filter, setFilter] = useState<string>("All");
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -23,10 +24,22 @@ export function CollectionView() {
     return ["All", ...Array.from(unique).sort()];
   }, [items, language]);
 
-  const visibleItems =
-    filter === "All"
-      ? items
-      : items.filter((item) => localizeSpeciesInfo(item.species_info, language).animal_group === filter);
+  const visibleItems = useMemo(
+    () =>
+      filter === "All"
+        ? items
+        : items.filter((item) => localizeSpeciesInfo(item.species_info, language).animal_group === filter),
+    [filter, items, language]
+  );
+
+  const selectedItem = useMemo(
+    () => visibleItems.find((item) => item.id === selectedItemId) ?? null,
+    [visibleItems, selectedItemId]
+  );
+  const selectedSpecies = useMemo(
+    () => (selectedItem ? localizeSpeciesInfo(selectedItem.species_info, language) : null),
+    [selectedItem, language]
+  );
 
   async function loadCollection() {
     setIsLoading(true);
@@ -58,6 +71,7 @@ export function CollectionView() {
     if (!token) return;
     await deleteCollectionItem(itemId, token);
     setItems((current) => current.filter((item) => item.id !== itemId));
+    setSelectedItemId((current) => (current === itemId ? null : current));
   }
 
   useEffect(() => {
@@ -69,6 +83,25 @@ export function CollectionView() {
       setFilter("All");
     }
   }, [filter, groups]);
+
+  useEffect(() => {
+    if (selectedItemId && !visibleItems.some((item) => item.id === selectedItemId)) {
+      setSelectedItemId(null);
+    }
+  }, [selectedItemId, visibleItems]);
+
+  useEffect(() => {
+    if (!selectedItemId) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setSelectedItemId(null);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [selectedItemId]);
 
   return (
     <section>
@@ -110,45 +143,131 @@ export function CollectionView() {
           </div>
         </div>
       ) : (
-        <div className="collection-grid">
-          {visibleItems.map((item) => {
-            const speciesInfo = localizeSpeciesInfo(item.species_info, language);
+        <>
+          <div className="collection-grid">
+            {visibleItems.map((item) => {
+              const speciesInfo = localizeSpeciesInfo(item.species_info, language);
 
-            return (
-              <article className="animal-card" key={item.id}>
-                <div className="animal-image">
-                  {item.signed_image_url ? (
-                    <img
-                      src={item.signed_image_url}
-                      alt={`${t("savedPhotoAlt")} ${speciesInfo.display_name}`}
-                      loading="lazy"
-                    />
-                  ) : null}
-                </div>
-                <div className="animal-body">
-                  <div className="animal-title">
-                    <div>
-                      <h2>{speciesInfo.display_name}</h2>
-                      <span className="muted">
-                        {new Date(item.created_at).toLocaleDateString(language === "vi" ? "vi-VN" : "en-US")}
-                      </span>
+              return (
+                <article className={`animal-card ${selectedItem?.id === item.id ? "active" : ""}`} key={item.id}>
+                  <button
+                    aria-label={`${t("openAnimalDetails")} ${speciesInfo.display_name}`}
+                    className="animal-image animal-image-button"
+                    type="button"
+                    onClick={() => setSelectedItemId(item.id)}
+                  >
+                    {item.signed_image_url ? (
+                      <img
+                        src={item.signed_image_url}
+                        alt={`${t("savedPhotoAlt")} ${speciesInfo.display_name}`}
+                        loading="lazy"
+                      />
+                    ) : null}
+                  </button>
+                  <div className="animal-body">
+                    <div className="animal-title">
+                      <div>
+                        <h2>{speciesInfo.display_name}</h2>
+                        <span className="muted">
+                          {new Date(item.created_at).toLocaleDateString(language === "vi" ? "vi-VN" : "en-US")}
+                        </span>
+                      </div>
+                      <span className="confidence-pill high">{Math.round(item.confidence * 100)}%</span>
                     </div>
-                    <span className="confidence-pill high">{Math.round(item.confidence * 100)}%</span>
+                    <p className="muted">{speciesInfo.fun_fact}</p>
+                    <div className="row">
+                      <span className="tag">{speciesInfo.animal_group}</span>
+                      <button className="button button-danger" type="button" onClick={() => handleDelete(item.id)}>
+                        <Trash2 size={16} />
+                        {t("delete")}
+                      </button>
+                    </div>
                   </div>
-                  <p className="muted">{speciesInfo.fun_fact}</p>
-                  <div className="row">
-                    <span className="tag">{speciesInfo.animal_group}</span>
-                    <button className="button button-danger" type="button" onClick={() => handleDelete(item.id)}>
-                      <Trash2 size={16} />
-                      {t("delete")}
-                    </button>
+                </article>
+              );
+            })}
+          </div>
+
+          {selectedItem && selectedSpecies ? (
+            <div
+              className="album-hover-layer"
+              aria-live="polite"
+              role="presentation"
+              onClick={() => setSelectedItemId(null)}
+            >
+              <aside className="album-hover-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
+                <button
+                  aria-label={t("closePreview")}
+                  className="album-hover-close"
+                  type="button"
+                  onClick={() => setSelectedItemId(null)}
+                >
+                  <X size={18} />
+                </button>
+              <div className="album-hover-image">
+                {selectedItem.signed_image_url ? (
+                  <img src={selectedItem.signed_image_url} alt={`${t("savedPhotoAlt")} ${selectedSpecies.display_name}`} />
+                ) : (
+                  <div className="album-hover-empty">
+                    <ImageOff size={42} aria-hidden="true" />
                   </div>
+                )}
+              </div>
+
+              <div className="album-hover-body">
+                <div className="album-hover-title">
+                  <div>
+                    <span className="eyebrow">{t("hoverPreviewEyebrow")}</span>
+                    <h2>{selectedSpecies.display_name}</h2>
+                  </div>
+                  <span className="confidence-pill high">{Math.round(selectedItem.confidence * 100)}%</span>
                 </div>
-              </article>
-            );
-          })}
-        </div>
+
+                <p className="album-hover-description">{selectedSpecies.description}</p>
+
+                <div className="album-hover-facts">
+                  <PreviewFact label={t("matchScore")} value={`${Math.round(selectedItem.confidence * 100)}%`} />
+                  <PreviewFact
+                    label={t("savedAt")}
+                    value={new Date(selectedItem.created_at).toLocaleDateString(language === "vi" ? "vi-VN" : "en-US")}
+                  />
+                  <PreviewFact label={t("group")} value={selectedSpecies.animal_group} />
+                  <PreviewFact label={t("danger")} value={selectedSpecies.danger_level} />
+                  <PreviewFact label={t("habitat")} value={selectedSpecies.habitat} />
+                  <PreviewFact label={t("diet")} value={selectedSpecies.diet} />
+                </div>
+
+                {selectedSpecies.fun_fact ? <p className="album-hover-note">{selectedSpecies.fun_fact}</p> : null}
+
+                {selectedItem.top_predictions.length > 0 ? (
+                  <div className="album-hover-matches">
+                    <h3>{t("topPredictions")}</h3>
+                    {selectedItem.top_predictions.map((prediction) => (
+                      <div className="album-hover-match" key={prediction.class_name}>
+                        <span>{localizeSpeciesDisplayName(prediction.class_name, prediction.display_name, language)}</span>
+                        <strong>{Math.round(prediction.confidence * 100)}%</strong>
+                        <div className="album-hover-meter" aria-hidden="true">
+                          <span style={{ width: `${Math.round(prediction.confidence * 100)}%` }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+              </aside>
+            </div>
+          ) : null}
+        </>
       )}
     </section>
+  );
+}
+
+function PreviewFact({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="album-hover-fact">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
   );
 }

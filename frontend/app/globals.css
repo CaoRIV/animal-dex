@@ -307,22 +307,10 @@ img {
   overflow: hidden;
   border: 10px solid rgba(255, 250, 240, 0.88);
   border-radius: 24px;
-  background-image: url("https://images.unsplash.com/photo-1546182990-dffeafbe841d?auto=format&fit=crop&w=1200&q=80");
-  background-position: center;
+  background-image: url("/hero-cat.jpg");
+  background-position: center 38%;
   background-size: cover;
   box-shadow: 0 22px 60px rgba(31, 23, 20, 0.22);
-}
-
-.specimen-badge {
-  position: absolute;
-  left: 54px;
-  bottom: 54px;
-  z-index: 2;
-  min-height: 38px;
-  border: 1px solid rgba(255, 250, 240, 0.58);
-  background: rgba(255, 250, 240, 0.88);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 14px 34px rgba(31, 23, 20, 0.16);
 }
 
 .section-title,
@@ -648,11 +636,24 @@ img {
 }
 
 .animal-card {
+  position: relative;
   overflow: hidden;
   border: 1px solid rgba(31, 23, 20, 0.12);
   border-radius: 22px;
   background: rgba(255, 250, 240, 0.82);
   box-shadow: 0 18px 46px rgba(31, 23, 20, 0.08);
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.animal-card:hover,
+.animal-card.active,
+.animal-card:focus-within,
+.animal-card:focus-visible {
+  z-index: 2;
+  border-color: rgba(190, 26, 26, 0.34);
+  box-shadow: 0 24px 70px rgba(124, 16, 15, 0.18);
+  outline: none;
+  transform: translateY(-4px);
 }
 
 .animal-image {
@@ -660,6 +661,19 @@ img {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: linear-gradient(135deg, rgba(247, 216, 127, 0.7), rgba(208, 49, 30, 0.12));
+}
+
+.animal-image-button {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.animal-image-button:focus-visible {
+  outline: 3px solid rgba(190, 26, 26, 0.42);
+  outline-offset: -6px;
 }
 
 .animal-image img {
@@ -689,6 +703,180 @@ img {
 
 .muted {
   color: var(--ink-600);
+}
+
+.album-hover-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(31, 23, 20, 0.44);
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  animation: hoverBackdropIn 140ms ease both;
+}
+
+.album-hover-modal {
+  position: relative;
+  width: min(640px, calc(100vw - 28px));
+  max-height: min(760px, 86vh);
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid rgba(190, 26, 26, 0.2);
+  border-radius: 28px;
+  background: rgba(255, 250, 240, 0.97);
+  box-shadow: 0 34px 110px rgba(31, 23, 20, 0.42);
+  pointer-events: auto;
+  scrollbar-gutter: stable;
+  animation: hoverPreviewIn 160ms ease both;
+  backdrop-filter: blur(18px);
+}
+
+.album-hover-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 1px solid rgba(31, 23, 20, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.88);
+  color: var(--ink-950);
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(31, 23, 20, 0.16);
+}
+
+.album-hover-close:hover,
+.album-hover-close:focus-visible {
+  background: var(--ember-700);
+  color: var(--paper-50);
+  outline: none;
+}
+
+.album-hover-image {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(247, 216, 127, 0.72), rgba(208, 49, 30, 0.14));
+}
+
+.album-hover-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.album-hover-empty {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  color: var(--ink-600);
+}
+
+.album-hover-body {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.album-hover-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.album-hover-title h2 {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.album-hover-description,
+.album-hover-note {
+  margin: 0;
+  color: var(--ink-600);
+  line-height: 1.55;
+}
+
+.album-hover-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.album-hover-fact {
+  min-width: 0;
+  border: 1px solid rgba(31, 23, 20, 0.1);
+  border-radius: 14px;
+  padding: 11px 12px;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.album-hover-fact span {
+  display: block;
+  color: var(--ink-600);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.album-hover-fact strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--ink-950);
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.album-hover-note {
+  border-radius: 16px;
+  padding: 13px 14px;
+  background: rgba(247, 216, 127, 0.28);
+  color: var(--ink-800);
+}
+
+.album-hover-matches {
+  display: grid;
+  gap: 9px;
+}
+
+.album-hover-matches h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.album-hover-match {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 10px;
+  align-items: center;
+}
+
+.album-hover-match span,
+.album-hover-match strong {
+  font-size: 0.9rem;
+}
+
+.album-hover-meter {
+  grid-column: 1 / -1;
+  height: 7px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(31, 23, 20, 0.1);
+}
+
+.album-hover-meter span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--ember-700), var(--sun-300));
 }
 
 .stats-grid {
@@ -739,6 +927,28 @@ img {
   }
   50% {
     opacity: 0.55;
+  }
+}
+
+@keyframes hoverPreviewIn {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes hoverBackdropIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -794,6 +1004,7 @@ img {
   .stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
 }
 
 @media (max-width: 620px) {
@@ -833,12 +1044,8 @@ img {
     inset: 20px;
   }
 
-  .specimen-badge {
-    left: 36px;
-    bottom: 36px;
-  }
-
   .info-grid,
+  .album-hover-facts,
   .collection-grid,
   .stats-grid,
   .prediction-row {

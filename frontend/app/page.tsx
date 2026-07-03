@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, FlaskConical, Images, ShieldCheck } from "lucide-react";
+import { ArrowRight, FlaskConical, Images } from "lucide-react";
 import { UploadStudio } from "@/components/UploadStudio";
 import { useI18n } from "@/lib/i18n";
 
@@ -32,10 +32,6 @@ export default function HomePage() {
         <aside className="hero-panel" aria-label="AnimalDex preview">
           <div className="specimen-stage">
             <div className="specimen-photo" role="img" aria-label="AnimalDex specimen preview" />
-            <span className="confidence-pill high specimen-badge">
-              <ShieldCheck size={16} aria-hidden="true" />
-              {t("heroMetric")}
-            </span>
           </div>
         </aside>
       </section>
