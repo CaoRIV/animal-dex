@@ -23,16 +23,24 @@
 
 html {
   min-width: 320px;
+  overflow-x: hidden;
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
   background:
     radial-gradient(circle at 12% 10%, rgba(247, 216, 127, 0.42), transparent 28rem),
     linear-gradient(135deg, #fffaf0 0%, #f8ebab 42%, #f7d87f 100%);
   color: var(--ink-950);
   font-family: var(--font-sans);
+}
+
+body.modal-open {
+  overflow: hidden;
+  touch-action: none;
 }
 
 button,
@@ -55,6 +63,37 @@ a {
 
 img {
   max-width: 100%;
+}
+
+.row > *,
+.species-heading > *,
+.collection-header > *,
+.profile-header > *,
+.auth-form > *,
+.stat-card,
+.animal-card,
+.info-tile,
+.album-hover-fact {
+  min-width: 0;
+}
+
+.section-title,
+.section-subtitle,
+.muted,
+.notice,
+.field-hint,
+.animal-card h3,
+.animal-card p,
+.animal-title h2,
+.album-hover-title h2,
+.album-hover-body p,
+.info-tile strong,
+.info-tile span,
+.album-hover-fact strong,
+.album-hover-fact span,
+.stat-card strong,
+.stat-card span {
+  overflow-wrap: anywhere;
 }
 
 .app-shell {
@@ -113,6 +152,7 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
   min-height: 42px;
   border-radius: 999px;
   padding: 0 14px;
@@ -224,6 +264,8 @@ img {
 
 .button {
   display: inline-flex;
+  max-width: 100%;
+  min-width: 0;
   min-height: 46px;
   cursor: pointer;
   align-items: center;
@@ -233,6 +275,8 @@ img {
   border-radius: 999px;
   padding: 0 18px;
   font-weight: 800;
+  text-align: center;
+  white-space: nowrap;
   transition: background 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
 }
 
@@ -381,7 +425,7 @@ img {
 
 .upload-zone {
   display: grid;
-  min-height: 330px;
+  min-height: clamp(220px, 56vw, 330px);
   place-items: center;
   border: 2px dashed rgba(190, 26, 26, 0.3);
   border-radius: 20px;
@@ -401,7 +445,7 @@ img {
 .upload-zone label {
   display: grid;
   width: 100%;
-  min-height: 330px;
+  min-height: clamp(220px, 56vw, 330px);
   cursor: pointer;
   place-items: center;
   padding: 24px;
@@ -410,7 +454,7 @@ img {
 .upload-preview {
   width: 100%;
   height: 100%;
-  min-height: 330px;
+  min-height: clamp(220px, 56vw, 330px);
   object-fit: cover;
   border-radius: 18px;
 }
@@ -668,7 +712,9 @@ img {
   width: 100%;
   border: 0;
   padding: 0;
+  color: inherit;
   cursor: pointer;
+  text-align: inherit;
 }
 
 .animal-image-button:focus-visible {
@@ -721,7 +767,7 @@ img {
 .album-hover-modal {
   position: relative;
   width: min(640px, calc(100vw - 28px));
-  max-height: min(760px, 86vh);
+  max-height: min(760px, calc(100dvh - 48px));
   overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -731,18 +777,20 @@ img {
   box-shadow: 0 34px 110px rgba(31, 23, 20, 0.42);
   pointer-events: auto;
   scrollbar-gutter: stable;
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
   animation: hoverPreviewIn 160ms ease both;
   backdrop-filter: blur(18px);
 }
 
 .album-hover-close {
-  position: absolute;
+  position: sticky;
   top: 14px;
-  right: 14px;
   z-index: 2;
   display: grid;
   width: 38px;
   height: 38px;
+  margin: 14px 14px -52px auto;
   place-items: center;
   border: 1px solid rgba(31, 23, 20, 0.14);
   border-radius: 999px;
@@ -963,14 +1011,36 @@ img {
 }
 
 @media (max-width: 900px) {
-  .topbar-inner,
   .collection-header,
   .profile-header {
     align-items: stretch;
     flex-direction: column;
   }
 
+  .topbar-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand > span:last-child {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .language-switcher {
+    justify-self: end;
+  }
+
   .nav-links {
+    grid-column: 1 / -1;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     width: 100%;
@@ -988,7 +1058,13 @@ img {
   }
 
   .hero {
+    gap: 28px;
     min-height: auto;
+  }
+
+  .hero-copy {
+    gap: 22px;
+    padding: 20px 0 0;
   }
 
   .hero-panel {
@@ -1015,21 +1091,61 @@ img {
     border-radius: 16px;
   }
 
+  .topbar-inner {
+    gap: 8px;
+    padding: 8px;
+  }
+
   .shell-main {
     width: min(100% - 20px, 1120px);
-    padding-top: 28px;
+    padding-top: 24px;
+    padding-bottom: 48px;
   }
 
   .brand {
+    gap: 8px;
+    min-height: 40px;
     padding: 0 4px;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+  }
+
+  .language-switcher {
+    min-height: 36px;
+    padding: 3px;
+  }
+
+  .language-switcher button {
+    min-width: 36px;
+    font-size: 0.76rem;
+  }
+
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-link {
+    min-height: 42px;
+    justify-content: center;
+    border-radius: 14px;
+    padding: 0;
   }
 
   .nav-link span {
     display: none;
   }
 
+  .hero {
+    gap: 18px;
+  }
+
   .hero-copy {
-    padding-top: 12px;
+    gap: 18px;
+    padding-top: 8px;
   }
 
   .hero h1 {
@@ -1037,11 +1153,134 @@ img {
   }
 
   .specimen-stage {
-    min-height: 390px;
+    min-height: clamp(260px, 68vw, 390px);
   }
 
   .specimen-photo {
-    inset: 20px;
+    inset: clamp(14px, 5vw, 20px);
+    border-width: 6px;
+    border-radius: 20px;
+  }
+
+  .upload-zone,
+  .upload-zone label,
+  .upload-preview {
+    min-height: clamp(220px, 56vw, 280px);
+  }
+
+  .upload-zone label {
+    padding: 16px;
+  }
+
+  .upload-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 14px;
+    border-radius: 18px;
+  }
+
+  .species-heading {
+    align-items: flex-start;
+  }
+
+  .species-heading > strong {
+    width: 100%;
+    font-size: 1.45rem;
+  }
+
+  .album-hover-layer {
+    padding: 10px;
+  }
+
+  .album-hover-modal {
+    width: calc(100vw - 20px);
+    max-height: calc(100dvh - 20px);
+    border-radius: 22px;
+  }
+
+  .album-hover-close {
+    top: 10px;
+    width: 44px;
+    height: 44px;
+    margin: 10px 10px -54px auto;
+  }
+
+  .album-hover-image {
+    aspect-ratio: 4 / 3;
+  }
+
+  .album-hover-body {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .album-hover-title {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .album-hover-title h2 {
+    font-size: 1.35rem;
+  }
+
+  .auth-shell {
+    min-height: auto;
+    place-items: stretch;
+  }
+
+  .auth-panel {
+    border-radius: 18px;
+  }
+
+  .auth-art {
+    display: none;
+  }
+
+  .auth-form {
+    align-content: start;
+    gap: 14px;
+  }
+
+  .auth-panel h1 {
+    font-size: clamp(1.65rem, 10vw, 2.3rem);
+    line-height: 1.08;
+  }
+
+  .field input {
+    min-height: 46px;
+  }
+
+  .segmented {
+    border-radius: 14px;
+  }
+
+  .segmented button {
+    min-height: 42px;
+  }
+
+  .profile-header {
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .stat-card {
+    border-radius: 18px;
+    padding: 16px;
+  }
+
+  .stat-card .row {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .stat-card .row svg {
+    flex: 0 0 auto;
+  }
+
+  .stat-card strong {
+    font-size: clamp(1.75rem, 12vw, 3rem);
+    line-height: 1.05;
   }
 
   .info-grid,
@@ -1058,6 +1297,25 @@ img {
   }
 
   .button {
+    min-height: 44px;
+    padding: 10px 14px;
+    line-height: 1.2;
+    white-space: normal;
     width: 100%;
+  }
+
+  .hero-actions .button,
+  .row .button {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .brand > span:last-child {
+    display: none;
+  }
+
+  .brand {
+    justify-content: center;
   }
 }
