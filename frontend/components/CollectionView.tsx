@@ -93,6 +93,8 @@ export function CollectionView() {
   useEffect(() => {
     if (!selectedItemId) return;
 
+    document.body.classList.add("modal-open");
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setSelectedItemId(null);
@@ -100,7 +102,10 @@ export function CollectionView() {
     }
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.classList.remove("modal-open");
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, [selectedItemId]);
 
   return (
