@@ -1,8 +1,8 @@
 import type { CollectionCreate, CollectionItem, PredictionResponse, UploadResponse } from "@/lib/types";
 
-const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+export const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
-async function parseResponse<T>(response: Response): Promise<T> {
+export async function parseResponse<T>(response: Response): Promise<T> {
   if (!response.ok) {
     let detail = "Request failed.";
     try {

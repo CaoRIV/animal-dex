@@ -6,8 +6,10 @@
     "dev": "next dev --hostname 127.0.0.1 --port 3000",
     "dev:3001": "next dev --hostname 127.0.0.1 --port 3001",
     "build": "next build",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests",
     "start": "next start --hostname 127.0.0.1 --port 3000",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.4",
@@ -20,8 +22,10 @@
     "@types/node": "^22.10.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@eslint/eslintrc": "^3.3.1",
     "eslint": "^9.17.0",
     "eslint-config-next": "^15.1.3",
+    "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   }
 }

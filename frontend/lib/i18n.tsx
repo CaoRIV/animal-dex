@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 export type Language = "vi" | "en";
 
-const dictionary = {
+export const dictionary = {
   vi: {
     navIdentify: "Nhận diện",
     navCollection: "Album",
