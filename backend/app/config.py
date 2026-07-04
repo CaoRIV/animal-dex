@@ -15,6 +15,7 @@ class Settings(BaseSettings):
     class_indices_path: Path = Field(default=Path("model/class_indices.json"), alias="CLASS_INDICES_PATH")
     species_info_path: Path = Field(default=Path("model/species_info.json"), alias="SPECIES_INFO_PATH")
     cors_origins: str = Field(default="http://localhost:3000", alias="CORS_ORIGINS")
+    cors_origin_regex: str | None = Field(default=r"https://.*\.vercel\.app", alias="CORS_ORIGIN_REGEX")
 
     confidence_high: float = 0.7
     confidence_low: float = 0.4
@@ -33,7 +34,7 @@ class Settings(BaseSettings):
 
     @property
     def allowed_origins(self) -> list[str]:
-        return [origin.strip() for origin in self.cors_origins.split(",") if origin.strip()]
+        return [origin.strip().strip("\"'") for origin in self.cors_origins.split(",") if origin.strip()]
 
 
 @lru_cache
