@@ -40,6 +40,7 @@ body {
 
 body.modal-open {
   overflow: hidden;
+  touch-action: none;
 }
 
 button,
@@ -678,7 +679,9 @@ img {
   width: 100%;
   border: 0;
   padding: 0;
+  color: inherit;
   cursor: pointer;
+  text-align: inherit;
 }
 
 .animal-image-button:focus-visible {
@@ -741,19 +744,20 @@ img {
   box-shadow: 0 34px 110px rgba(31, 23, 20, 0.42);
   pointer-events: auto;
   scrollbar-gutter: stable;
+  touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
   animation: hoverPreviewIn 160ms ease both;
   backdrop-filter: blur(18px);
 }
 
 .album-hover-close {
-  position: absolute;
+  position: sticky;
   top: 14px;
-  right: 14px;
   z-index: 2;
   display: grid;
   width: 38px;
   height: 38px;
+  margin: 14px 14px -52px auto;
   place-items: center;
   border: 1px solid rgba(31, 23, 20, 0.14);
   border-radius: 999px;
@@ -1163,9 +1167,9 @@ img {
 
   .album-hover-close {
     top: 10px;
-    right: 10px;
     width: 44px;
     height: 44px;
+    margin: 10px 10px -54px auto;
   }
 
   .album-hover-image {

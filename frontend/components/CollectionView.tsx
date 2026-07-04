@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { ImageOff, LoaderCircle, Trash2, X } from "lucide-react";
 import { deleteCollectionItem, getCollection } from "@/lib/api";
@@ -16,6 +16,9 @@ export function CollectionView() {
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const modalRef = useRef<HTMLElement | null>(null);
+  const openerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const groups = useMemo(() => {
     const unique = new Set(
@@ -40,6 +43,7 @@ export function CollectionView() {
     () => (selectedItem ? localizeSpeciesInfo(selectedItem.species_info, language) : null),
     [selectedItem, language]
   );
+  const selectedTitleId = selectedItem ? `animal-preview-title-${selectedItem.id}` : undefined;
 
   async function loadCollection() {
     setIsLoading(true);
@@ -94,10 +98,30 @@ export function CollectionView() {
     if (!selectedItemId) return;
 
     document.body.classList.add("modal-open");
+    window.setTimeout(() => closeButtonRef.current?.focus(), 0);
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setSelectedItemId(null);
+        return;
+      }
+
+      if (event.key === "Tab") {
+        const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (!focusable?.length) return;
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     }
 
@@ -105,6 +129,7 @@ export function CollectionView() {
     return () => {
       document.body.classList.remove("modal-open");
       window.removeEventListener("keydown", handleKeyDown);
+      openerRefs.current[selectedItemId]?.focus();
     };
   }, [selectedItemId]);
 
@@ -157,7 +182,11 @@ export function CollectionView() {
                 <article className={`animal-card ${selectedItem?.id === item.id ? "active" : ""}`} key={item.id}>
                   <button
                     aria-label={`${t("openAnimalDetails")} ${speciesInfo.display_name}`}
+                    aria-haspopup="dialog"
                     className="animal-image animal-image-button"
+                    ref={(node) => {
+                      openerRefs.current[item.id] = node;
+                    }}
                     type="button"
                     onClick={() => setSelectedItemId(item.id)}
                   >
@@ -200,10 +229,18 @@ export function CollectionView() {
               role="presentation"
               onClick={() => setSelectedItemId(null)}
             >
-              <aside className="album-hover-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
+              <aside
+                aria-labelledby={selectedTitleId}
+                className="album-hover-modal"
+                ref={modalRef}
+                role="dialog"
+                aria-modal="true"
+                onClick={(event) => event.stopPropagation()}
+              >
                 <button
                   aria-label={t("closePreview")}
                   className="album-hover-close"
+                  ref={closeButtonRef}
                   type="button"
                   onClick={() => setSelectedItemId(null)}
                 >
@@ -223,7 +260,7 @@ export function CollectionView() {
                 <div className="album-hover-title">
                   <div>
                     <span className="eyebrow">{t("hoverPreviewEyebrow")}</span>
-                    <h2>{selectedSpecies.display_name}</h2>
+                    <h2 id={selectedTitleId}>{selectedSpecies.display_name}</h2>
                   </div>
                   <span className="confidence-pill high">{Math.round(selectedItem.confidence * 100)}%</span>
                 </div>
