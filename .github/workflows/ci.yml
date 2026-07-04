@@ -25,6 +25,8 @@ jobs:
 
       - name: Run backend tests
         run: pytest backend/tests
+        env:
+          PYTHONPATH: .
 
   frontend:
     name: Frontend checks
@@ -48,7 +50,7 @@ jobs:
 
       - name: Install frontend dependencies
         working-directory: frontend
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Run frontend tests
         working-directory: frontend
